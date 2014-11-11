@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link id="page_favicon" href="favicon.ico" rel="icon" type="image/x-icon" />
+    <title>IT Health Mapeo</title>
+    <link rel="stylesheet" href="assets/lib/jquery/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" href="assets/css/app.css" />
+</head>
+<body>
+<div data-role="page" id="page-home">
+    <div id="header-home" data-role="header" class="header-content"></div>
+    <div role="main" class="ui-content">
+        <div class="ui-grid-solo">
+            <div class="ui-block-a">
+                <div class="ith-div-header-content">
+                    <img class="img-header-home" src="assets/image/logos/ith-header-logo-brasil.png">
+                </div>
+            </div>
+            <div class="ui-block-a">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div data-role="footer" class="footer-content" data-position="fixed"></div>
+</div>
+<div data-role="page" id="page-app-info">
+    <div id="header-app-info" data-role="header" class="header-content"></div>
+    <div role="main" class="ui-content">
+        <div class="ui-grid-solo">
+            <div class="ui-block-a">
+                <h6>
+                    <ul>
+                        <li>
+                            Version
+                            <ul>
+                                <li><p>0.0.3-334ad8a(git)</p></li>
+                            </ul>
+                        </li>
+                        <li>
+                            Developers
+                            <ul>
+                                <li><p>Aldo Alcaraz (<a href="#" onclick="window.open('mailto:alcaraz.aldo@gmail.com');">alcaraz.aldo@gmail.com</a>)</p></li>
+                                <li><p>David Rodrigo Colman (<a href="#" onclick="window.open('mailto:colmanrodrigo@gmail.com');">colmanrodrigo@gmail.com</a>)</p></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                </h6>
+             </div>
+        </div>
+    </div>
+    <div data-role="footer" class="footer-content" data-position="fixed"></div>
+</div>
+<div data-role="page" id="page-listado-frases">
+    <div id="header-listado-frases" data-role="header" class="header-content"></div>
+    <div role="main" class="ui-content">
+        <div id="div-listado-frases" class="ui-grid-a">
+            <ul id="ul-frases-listview" data-role="listview" data-filter="true" data-inset="true"></ul>
+        </div>
+    </div>
+    <div data-role="footer" class="footer-content" data-position="fixed"></div>
+</div>
+<div data-role="page" id="page-nueva-frase">
+    <div data-role="header" class="header-content"></div>
+    <div role="main" class="ui-content">
+        <form id="frm-new-frase" onsubmit="return false;">
+            <div data-role="fieldcontain">
+                <label for="frase-alta-autor">Autor:</label>
+                <input type="text" name="autor" id="frase-alta-autor" value=""/>
+            </div>
+            <div data-role="fieldcontain">
+                <label for="frase-alta-texto">Frase:</label>
+                <textarea name="texto" id="frase-alta-texto"></textarea>
+            </div>
+            <input type="button" id="btn-save-new-frase" class="ui-btn" data-theme="b" value="Guardar">
+            <div id="div-ajax-response"></div>
+        </form>
+    </div>
+    <div data-role="footer" class="footer-content" data-position="fixed"></div>
+</div>
+<div data-role="page" id="page-vista-frase">
+    <div data-role="header" class="header-content"></div>
+    <div id="frase-view-content" role="main" class="ui-content"></div>
+    <div data-role="footer" class="footer-content" data-position="fixed"></div>
+</div>
+<!----------------------------::InitTemplates::---------------------------->
+<script id="div-rows-frases" type="text/x-handlebars-template">
+    {{#each frases}}
+    <li>
+        <h2>{{autor}}</h2>
+        <p>{{{texto}}}</p>
+        <p class="ui-li-aside"><strong>#{{id}}</strong></p>
+    </li>
+    {{/each}}
+    <input type="hidden" class="next-page" value="{{ page }}">
+</script>
+<script id="header-content" type="text/x-handlebars-template">
+    <div class="ui-bar ui-bar-b">
+        <img src="assets/image/logos/ith-header-logo_ldpi.png" class="logo ui-btn-inline">
+        <h1 class="ui-btn-inline">Mapeo </h1>
+    </div>
+    <h1>{{title}}</h1>
+    {{{html}}}
+</script>
+<script id="footer-content" type="text/x-handlebars-template">
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#page-home" data-icon="home" >Home</a></li>
+            <li><a href="#page-listado-frases" data-icon="location">Location</a></li>
+            <li><a href="#page-app-info" data-icon="info">About</a></li>
+        </ul>
+    </div>
+</script>
+<script id="location-navbar" type="text/x-handlebars-template">
+    <div data-role="navbar">
+        <ul>
+            <li><a id="a-reload-location" href="#" data-icon="refresh" data-theme="b">Actualizar</a></li>
+            <li><a href="#" data-icon="location" data-theme="b">Me</a></li>
+            <li><a href="#" data-icon="search" data-theme="b">Pet Shops</a></li>
+        </ul>
+    </div>
+</script>
+<script id="frase-view" type="text/x-handlebars-template">
+    <h3 class="ui-bar ui-bar-a ui-corner-all">{{autor}}</h3>
+    <div class="ui-body ui-body-a ui-corner-all">
+        <p>{{texto}}</p>
+    </div>
+</script>
+<!----------------------------::EndTemplates::---------------------------->
+<script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+<script src="assets/lib/jquery/jquery-1.11.1.min.js"></script>
+<script src="assets/lib/jquery/jquery.jscroll.min.js"></script>
+<script src="assets/lib/jquery/jquery.mobile-1.4.4.min.js"></script>
+<script src="assets/lib/handlebars/handlebars-v1.3.0.js"></script>
+<script src="assets/lib/min/empty.min.js"></script>
+<script src="config/config.js"></script>
+<script src="app/Helper.js"></script>
+<script src="models/Frase.js"></script>
+<script src="controllers/FraseController.js"></script>
+<script src="app/App.js"></script>
+<script type="application/javascript">
+    App.initialize();
+</script>
+</body>
+</html>
