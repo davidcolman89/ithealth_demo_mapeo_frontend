@@ -161,7 +161,7 @@
 <script id="mascota-listado" type="text/x-handlebars-template">
     {{#each mascotas}}
     <li>
-        <h2><a href="#" class="a-go-to-mascota-view">{{nombre}}</a></h2>
+        <h2><a href="#" class="a-go-to-mascota-view" data-id-mascota="{{id}}">{{nombre}}</a></h2>
         <p>
             {{descripcion}}
         </p>
@@ -176,14 +176,14 @@
         <p>
             {{descripcion}}
             <br>
-            <a class="a-show-evoluciones" href="#">Evoluciones</a>
+            <a class="a-show-evoluciones" href="#" data-id-problema="{{id}}">Evoluciones</a>
         </p>
         <p class="ui-li-aside"><strong>#{{id}}</strong></p>
     </li>
     {{/each}}
 </script>
 <script id="mascota-evoluciones" type="text/x-handlebars-template">
-    <h2>Evoluciones</h2>
+    <h2>Evoluciones de {{problema.titulo}} #{{problema.id}}</h2>
     <ul id="ul-evoluciones-listview" data-role="listview" data-filter="true" data-inset="true">
         {{#each evoluciones}}
         <li>

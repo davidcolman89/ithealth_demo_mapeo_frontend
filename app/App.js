@@ -4,6 +4,148 @@
 var App = {
     initialize: function () {
         App.cityCircle = "";
+        App.currentDuenio = 0;
+        App.currentMascota = null;
+        App.duenios = [
+            {
+                mascotas: [
+                    {
+                        id:1,
+                        nombre:"Perro Octabio",
+                        descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        duenio: 'David',
+                        sexo: 'Masculino',
+                        nacimiento: '99/99/9999',
+                        problemas:[
+                            {
+                                id:"1",
+                                titulo:"Pierna lastimada",
+                                descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                                evoluciones: [
+                                    {
+                                        id:1,
+                                        practica:{titulo:'Practica 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    },
+                                    {
+                                        id:2,
+                                        practica:{titulo:'Practica 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    }
+                                ]
+                            },
+                            {
+                                id:"2",
+                                titulo:"Resfrio",
+                                descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                                evoluciones: [
+                                    {
+                                        id:1,
+                                        practica:{titulo:'Practica 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    },
+                                    {
+                                        id:2,
+                                        practica:{titulo:'Practica 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    }
+                                ]
+                            },
+                            {
+                                id:"3",
+                                titulo:"Dolor de estomago",
+                                descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                                evoluciones: [
+                                    {
+                                        id:1,
+                                        practica:{titulo:'Practica 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    },
+                                    {
+                                        id:2,
+                                        practica:{titulo:'Practica 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        id:2,
+                        nombre: "Gato Olga",
+                        descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+                        duenio: 'David',
+                        sexo: 'Femenino',
+                        nacimiento: '99/99/9999',
+                        problemas:[
+                            {
+                                id:"1",
+                                titulo:"Pierna lastimada",
+                                descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                                evoluciones: [
+                                    {
+                                        id:1,
+                                        practica:{titulo:'Practica 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    },
+                                    {
+                                        id:2,
+                                        practica:{titulo:'Practica 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    }
+                                ]
+                            },
+                            {
+                                id:"2",
+                                titulo:"Resfrio",
+                                descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                                evoluciones: [
+                                    {
+                                        id:1,
+                                        practica:{titulo:'Practica 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    },
+                                    {
+                                        id:2,
+                                        practica:{titulo:'Practica 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    }
+                                ]
+                            },
+                            {
+                                id:"3",
+                                titulo:"Dolor de estomago",
+                                descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                                evoluciones: [
+                                    {
+                                        id:1,
+                                        practica:{titulo:'Practica 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    },
+                                    {
+                                        id:2,
+                                        practica:{titulo:'Practica 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        medicacion:{titulo:'Medicacion 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
+                                        estudio:{titulo:'Estudio 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
         App.locales = {
             petShops : [
                 {
@@ -88,10 +230,7 @@ var App = {
         Helper.jqueryMobileOnPageShow('#page-historia-clinica', function (e) {
             e.preventDefault();
             Helper.jqueryMobileShowAjaxLoading();
-            var mascotas = { mascotas:[
-                {id:1,nombre:"mascota 1",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
-                {id:2,nombre:"mascota 2",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
-            ]};
+            var mascotas = { mascotas:App.duenios[App.currentDuenio].mascotas};
             var html = App.templates.mascotasListado(mascotas);
             Helper.jqueryFillHTMLContent('#ul-mascotas-listview', html).listview('refresh');
             Helper.jqueryMobileHideAjaxLoading();
@@ -101,24 +240,21 @@ var App = {
             e.preventDefault();
             Helper.jqueryMobileShowAjaxLoading();
             var html;
-
+            var indexOfMascota = parseInt(App.currentMascota) - 1;
             Helper.jqueryClearHTMLContent('#div-evoluciones-listado');
 
             var informacion = {
-                nombre:"Mascota 1",
-                duenio:"Prueba 1",
-                sexo:"Masculino",
-                nacimiento:"99/99/9999"
+                nombre:App.duenios[App.currentDuenio].mascotas[indexOfMascota].nombre,
+                duenio:App.duenios[App.currentDuenio].mascotas[indexOfMascota].duenio,
+                sexo:App.duenios[App.currentDuenio].mascotas[indexOfMascota].sexo,
+                nacimiento:App.duenios[App.currentDuenio].mascotas[indexOfMascota].nacimiento
             };
 
             html = App.templates.mascotaVista(informacion);
             Helper.jqueryFillHTMLContent('#div-mascota-informacion', html);
 
-            var problemas = {problemas:[
-                {id:"1",titulo:"Pierna lastimada",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"},
-                {id:"2",titulo:"Resfrio",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"},
-                {id:"3",titulo:"Dolor de estomago",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"}
-            ]};
+            var problemas = {problemas:App.duenios[App.currentDuenio].mascotas[indexOfMascota].problemas};
+
             html = App.templates.mascotaProblemas(problemas);
             Helper.jqueryFillHTMLContent('#ul-problemas-listview', html).listview('refresh');
 
@@ -183,26 +319,19 @@ var App = {
 
         $("#ul-mascotas-listview").delegate('.a-go-to-mascota-view','click', function (e) {
             e.preventDefault();
-           Helper.jqueryMobileChangePage("#page-mascota");
+            App.currentMascota = $(this).attr("data-id-mascota");
+            Helper.jqueryMobileChangePage("#page-mascota");
         });
 
         $("#ul-problemas-listview").delegate('.a-show-evoluciones','click', function (e) {
             e.preventDefault();
             Helper.jqueryMobileShowAjaxLoading();
-            var evoluciones = {evoluciones:[
-                {
-                    id:1,
-                    practica:{titulo:'Practica 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
-                    medicacion:{titulo:'Medicacion 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
-                    estudio:{titulo:'Estudio 1',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
-                },
-                {
-                    id:2,
-                    practica:{titulo:'Practica 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
-                    medicacion:{titulo:'Medicacion 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'},
-                    estudio:{titulo:'Estudio 2',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
-                }
-            ]};
+            var idProblema = $(this).attr("data-id-problema");
+            var indexProblema = parseFloat(idProblema) - 1;
+            var evoluciones = {
+                problema:App.duenios[0].mascotas[0].problemas[indexProblema],
+                evoluciones:App.duenios[0].mascotas[0].problemas[indexProblema].evoluciones
+            };
             var html = App.templates.mascotaEvoluciones(evoluciones);
             Helper.jqueryFillHTMLContent('#div-evoluciones-listado', html)
                 .show()
@@ -210,12 +339,31 @@ var App = {
             Helper.jqueryMobileHideAjaxLoading();
         });
 
-        $("#map-canvas").delegate('.a-share','click', function (e) {
-            e.preventDefault();
-            alert('hola');
-            window.plugins.socialsharing.shareViaTwitter('Message via Twitter');
-            //$.mobile.changePage( "#page-share", { role: "dialog" } );
-        });
+        $("#map-canvas")
+            .delegate('.a-share-twitter','click', function (e) {
+                e.preventDefault();
+                var id = $(this).attr('data-id');
+                var idTitulo = "titulo-" + id;
+                var idDescripcion = "descripcion-" + id;
+                var titulo = $('#' + idTitulo).text();
+                var message = 'Recomiendo ' + titulo + ' la mejor atencion by @ITHealth';
+                window.plugins.socialsharing.shareViaTwitter(message);
+            })
+            .delegate('.a-share-facebook','click', function (e) {
+                e.preventDefault();
+                var id = $(this).attr('data-id');
+                var idTitulo = "titulo-" + id;
+                var idDescripcion = "descripcion-" + id;
+                var titulo = $('#' + idTitulo).text();
+                var message = 'Recomiendo ' + titulo + ' la mejor atencion by @ITHealth';
+                var image = null;
+                var url = null;
+                window.plugins.socialsharing.shareViaFacebook(message, image , url , function() {
+                    console.log('share ok');
+                }, function(errormsg){
+                    alert(errormsg)
+                });
+            });
 
     },
     onPageInit: function () {
