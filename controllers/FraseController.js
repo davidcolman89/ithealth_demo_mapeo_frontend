@@ -18,7 +18,7 @@ var FraseController = {
         selectorForm = '#' + FraseController.frase.getIdForm();
         selectorDiv = '#' + FraseController.frase.getIdDivAjaxResponse();
 
-        Helper.jqueryHideAjaxLoading();
+        Helper.jqueryMobileHideAjaxLoading();
         Helper.jqueryResetForm(selectorForm);
         Helper.jqueryClearHTMLContent(selectorDiv);
         Helper.jqueryFillHTMLContent(selectorDiv,data.message)
@@ -33,7 +33,7 @@ var FraseController = {
         var html = textErrors.join('<br/>');
         var jquerySelector = '#' + FraseController.frase.getIdDivAjaxResponse();
 
-        Helper.jqueryHideAjaxLoading();
+        Helper.jqueryMobileHideAjaxLoading();
         Helper.jqueryFillHTMLContent(jquerySelector, html)
             .fadeOut(500)
             .fadeIn(500)

@@ -41,14 +41,13 @@
                         <li>
                             Version
                             <ul>
-                                <li><p>0.0.3-334ad8a(git)</p></li>
+                                <li><p>0.0.1-ac5522e(git)</p></li>
                             </ul>
                         </li>
                         <li>
                             Developers
                             <ul>
-                                <li><p>Aldo Alcaraz (<a href="#" onclick="window.open('mailto:alcaraz.aldo@gmail.com');">alcaraz.aldo@gmail.com</a>)</p></li>
-                                <li><p>David Rodrigo Colman (<a href="#" onclick="window.open('mailto:colmanrodrigo@gmail.com');">colmanrodrigo@gmail.com</a>)</p></li>
+                                <li><p>IT Health (+54 11 42089491) <a href="#" onclick="window.open('mailto:info@ithealth.com.ar');">info@ithealth.com.ar</a></p></li>
                             </ul>
                         </li>
                     </ul>
@@ -59,49 +58,54 @@
     </div>
     <div data-role="footer" class="footer-content" data-position="fixed"></div>
 </div>
-<div data-role="page" id="page-listado-frases">
-    <div id="header-listado-frases" data-role="header" class="header-content"></div>
-    <div role="main" class="ui-content">
-        <div id="div-listado-frases" class="ui-grid-a">
-            <ul id="ul-frases-listview" data-role="listview" data-filter="true" data-inset="true"></ul>
+<div data-role="page" id="page-location" >
+    <div id="header-location" data-role="header" class="header-content"></div>
+    <div  role="main" class="ui-content" >
+        <div class="ui-grid-solo">
+            <div class="ui-block-a" >
+                <input id="geocomplete" type="text" class="form-control" placeholder="Ingrese una direccion..."/>
+            </div>
+        </div>
+        <div class="ui-grid-a" style="display: none;">
+            <div class="ui-block-a" >
+                LAT<input name="lat" type="text" id="lat" value="">
+            </div>
+            <div class="ui-block-b" >
+                LNG<input name="lng" type="text" id="lng" value="">
+            </div>
+        </div>
+        <div class="ui-grid-solo">
+            <div class="ui-block-a" id="map-canvas"></div>
         </div>
     </div>
     <div data-role="footer" class="footer-content" data-position="fixed"></div>
 </div>
-<div data-role="page" id="page-nueva-frase">
-    <div data-role="header" class="header-content"></div>
-    <div role="main" class="ui-content">
-        <form id="frm-new-frase" onsubmit="return false;">
-            <div data-role="fieldcontain">
-                <label for="frase-alta-autor">Autor:</label>
-                <input type="text" name="autor" id="frase-alta-autor" value=""/>
+<div data-role="page" id="page-historia-clinica">
+    <div id="header-historia-clinica" data-role="header" class="header-content"></div>
+    <div  role="main" class="ui-content" >
+        <div class="ui-grid-solo">
+            <div class="ui-block-a" >
+                <ul id="ul-mascotas-listview" data-role="listview" data-filter="true" data-inset="true"></ul>
             </div>
-            <div data-role="fieldcontain">
-                <label for="frase-alta-texto">Frase:</label>
-                <textarea name="texto" id="frase-alta-texto"></textarea>
-            </div>
-            <input type="button" id="btn-save-new-frase" class="ui-btn" data-theme="b" value="Guardar">
-            <div id="div-ajax-response"></div>
-        </form>
+        </div>
     </div>
     <div data-role="footer" class="footer-content" data-position="fixed"></div>
 </div>
-<div data-role="page" id="page-vista-frase">
-    <div data-role="header" class="header-content"></div>
-    <div id="frase-view-content" role="main" class="ui-content"></div>
+<div data-role="page" id="page-mascota">
+    <div id="header-mascota" data-role="header" class="header-content"></div>
+    <div  role="main" class="ui-content" >
+        <div id="div-mascota-informacion" class="ui-grid-solo"></div>
+        <div id="div-problemas-listado" class="ui-grid-solo">
+            <h1>Problemas</h1>
+            <ul id="ul-problemas-listview" data-role="listview" data-filter="true" data-inset="true"></ul>
+        </div>
+        <div id="div-evoluciones-listado" class="ui-grid-solo"></div>
+    </div>
     <div data-role="footer" class="footer-content" data-position="fixed"></div>
 </div>
+
 <!----------------------------::InitTemplates::---------------------------->
-<script id="div-rows-frases" type="text/x-handlebars-template">
-    {{#each frases}}
-    <li>
-        <h2>{{autor}}</h2>
-        <p>{{{texto}}}</p>
-        <p class="ui-li-aside"><strong>#{{id}}</strong></p>
-    </li>
-    {{/each}}
-    <input type="hidden" class="next-page" value="{{ page }}">
-</script>
+
 <script id="header-content" type="text/x-handlebars-template">
     <div class="ui-bar ui-bar-b">
         <img src="assets/image/logos/ith-header-logo_ldpi.png" class="logo ui-btn-inline">
@@ -114,7 +118,8 @@
     <div data-role="navbar">
         <ul>
             <li><a href="#page-home" data-icon="home" >Home</a></li>
-            <li><a href="#page-listado-frases" data-icon="location">Location</a></li>
+            <li><a href="#page-location" data-icon="location">Location</a></li>
+            <li><a href="#page-historia-clinica" data-icon="bullets">Mascotas</a></li>
             <li><a href="#page-app-info" data-icon="info">About</a></li>
         </ul>
     </div>
@@ -123,30 +128,94 @@
     <div data-role="navbar">
         <ul>
             <li><a id="a-reload-location" href="#" data-icon="refresh" data-theme="b">Actualizar</a></li>
-            <li><a href="#" data-icon="location" data-theme="b">Me</a></li>
-            <li><a href="#" data-icon="search" data-theme="b">Pet Shops</a></li>
+            <li><a href="#" id="a-georefence-me" data-icon="location" data-theme="b">Me</a></li>
+            <li><a href="#" id="a-georefence" data-icon="plus" data-theme="b">Marcar</a></li>
+            <li><a href="#" id="a-georefence-petshops" data-icon="search" data-theme="b">Pet Shops</a></li>
+            <li><a href="#" id="a-georefence-veterinarias" data-icon="search" data-theme="b">Veterinarias</a></li>
         </ul>
     </div>
 </script>
-<script id="frase-view" type="text/x-handlebars-template">
-    <h3 class="ui-bar ui-bar-a ui-corner-all">{{autor}}</h3>
-    <div class="ui-body ui-body-a ui-corner-all">
-        <p>{{texto}}</p>
-    </div>
+<script id="mascota-vista" type="text/x-handlebars-template">
+    <h1>Información</h1>
+    <table  class="ui-table table-stripe">
+        <tbody>
+        <tr>
+            <th>Nombre</th>
+            <td>{{nombre}}</td>
+        </tr>
+        <tr>
+            <th>Duenio</th>
+            <td>{{duenio}}</td>
+        </tr>
+        <tr>
+            <th>Sexo</th>
+            <td>{{sexo}}</td>
+        </tr>
+        <tr>
+            <th>Nacimiento</th>
+            <td>{{nacimiento}}</td>
+        </tr>
+        </tbody>
+    </table>
+</script>
+<script id="mascota-listado" type="text/x-handlebars-template">
+    {{#each mascotas}}
+    <li>
+        <h2><a href="#" class="a-go-to-mascota-view">{{nombre}}</a></h2>
+        <p>
+            {{descripcion}}
+        </p>
+        <p class="ui-li-aside"><strong>#{{id}}</strong></p>
+    </li>
+    {{/each}}
+</script>
+<script id="mascota-problemas" type="text/x-handlebars-template">
+    {{#each problemas}}
+    <li>
+        <h2>{{titulo}}</h2>
+        <p>
+            {{descripcion}}
+            <br>
+            <a class="a-show-evoluciones" href="#">Evoluciones</a>
+        </p>
+        <p class="ui-li-aside"><strong>#{{id}}</strong></p>
+    </li>
+    {{/each}}
+</script>
+<script id="mascota-evoluciones" type="text/x-handlebars-template">
+    <h2>Evoluciones</h2>
+    <ul id="ul-evoluciones-listview" data-role="listview" data-filter="true" data-inset="true">
+        {{#each evoluciones}}
+        <li>
+            <h2>{{practica.titulo}}</h2>
+            <p>{{practica.descripcion}}</p>
+
+            <h2>{{medicacion.titulo}}</h2>
+            <p>{{medicacion.descripcion}}</p>
+
+            <h2>{{estudio.titulo}}</h2>
+            <p>{{estudio.descripcion}}</p>
+            <p class="ui-li-aside"><strong>#{{id}}</strong></p>
+        </li>
+        {{/each}}
+    </ul>
 </script>
 <!----------------------------::EndTemplates::---------------------------->
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-<script src="assets/lib/jquery/jquery-1.11.1.min.js"></script>
-<script src="assets/lib/jquery/jquery.jscroll.min.js"></script>
-<script src="assets/lib/jquery/jquery.mobile-1.4.4.min.js"></script>
-<script src="assets/lib/handlebars/handlebars-v1.3.0.js"></script>
-<script src="assets/lib/min/empty.min.js"></script>
-<script src="config/config.js"></script>
-<script src="app/Helper.js"></script>
-<script src="models/Frase.js"></script>
-<script src="controllers/FraseController.js"></script>
-<script src="app/App.js"></script>
-<script type="application/javascript">
+<script src="assets/lib/jquery/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/lib/jquery/jquery.jscroll.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/lib/jquery/jquery.mobile-1.4.4.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="http://maps.google.com/maps/api/js?sensor=false&amp;language=es&amp;libraries=places" type="text/javascript"></script>
+<script src="assets/lib/jquery/jquery.geocomplete.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/lib/handlebars/handlebars-v1.3.0.js" type="text/javascript" charset="utf-8"></script>
+<script src="assets/lib/min/empty.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="config/config.js" type="text/javascript" charset="utf-8"></script>
+<script src="app/Helper.js" type="text/javascript" charset="utf-8"></script>
+<script src="app/Mapa.js" type="text/javascript" charset="utf-8"></script>
+<script src="app/App.js" type="text/javascript" charset="utf-8"></script>
+<script type="application/javascript" charset="utf-8">
+    var cityCircle;
+
     App.initialize();
 </script>
 </body>

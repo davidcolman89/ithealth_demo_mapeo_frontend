@@ -52,16 +52,17 @@ var Helper = {
     jqueryMobileOnPageShow:function (page, callback) {
         return $(document).on("pageshow", page, callback);
     },
-    jqueryShowAjaxLoading: function () {
+    jqueryMobileShowAjaxLoading: function () {
         return $.mobile.loading('show');
     },
-    jqueryHideAjaxLoading: function () {
+    jqueryMobileHideAjaxLoading: function () {
         return $.mobile.loading('hide');
     },
     jqueryMobileOnPageInit: function (callback) {
         return $(document).bind('pageinit',callback);
     },
     jqueryMobileChangePage: function (pageSelector, options) {
+        var options = options || {};
         return $(":mobile-pagecontainer").pagecontainer("change", pageSelector, options);
     },
     jqueryGetHTMLFromField: function (jquerySelector) {
