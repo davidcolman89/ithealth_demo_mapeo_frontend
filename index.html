@@ -100,6 +100,7 @@
             <ul id="ul-problemas-listview" data-role="listview" data-filter="true" data-inset="true"></ul>
         </div>
         <div id="div-evoluciones-listado" class="ui-grid-solo"></div>
+        <div id="div-estudios-imagenes" class="ui-grid-solo"></div>
     </div>
     <div data-role="footer" class="footer-content" data-position="fixed"></div>
 </div>
@@ -172,7 +173,7 @@
 <script id="mascota-problemas" type="text/x-handlebars-template">
     {{#each problemas}}
     <li>
-        <h2>{{titulo}}</h2>
+        <h2 class="estado_{{estado.id}}">{{estado.texto}} - {{titulo}}</h2>
         <p>
             {{descripcion}}
             <br>
@@ -194,21 +195,53 @@
             <p>{{medicacion.descripcion}}</p>
 
             <h2>{{estudio.titulo}}</h2>
-            <p>{{estudio.descripcion}}</p>
+            <p>
+                {{estudio.descripcion}}
+                <br>
+                <a class="a-estudio-ver-imagenes"><img src="assets/image/images_pictures_photos_collection-24.png"></a>
+            </p>
             <p class="ui-li-aside"><strong>#{{id}}</strong></p>
         </li>
         {{/each}}
     </ul>
 </script>
+<script id="estudio-imagenes" type="text/x-handlebars-template">
+    <ul id="ul-estudios-imagenes-listview" data-role="listview" data-filter="true" data-inset="true">
+        <li>
+            <h2>Imagen 1</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <br>
+                <a href="#"><img src="assets/image/mascotas/imagen_1.jpg"></a>
+            </p>
+        </li>
+        <li>
+            <h2>Imagen 2</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <br>
+                <a href="#"><img src="assets/image/mascotas/imagen_2.jpg"></a>
+            </p>
+        </li>
+        <li>
+            <h2>Imagen 3</h2>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                <br>
+                <a href="#"><img src="assets/image/mascotas/imagen_3.jpg"></a>
+            </p>
+        </li>
+    </ul>
+</script>
 <script id="local-petshop-informacion" type="text/x-handlebars-template">
-    <div class="ui-grid-solo"> 
+    <div class="ui-grid-solo">
         <div class="ui-block-a" >
             <p id="titulo-{{id}}">{{titulo}}</p>
             <p id="descripcion-{{id}}">{{descripcion}}</p>
-            <a href="#" class="a-share-twitter" data-id="{{id}}">Twitter</a>
-            |
-            <a href="#" class="a-share-facebook" data-id="{{id}}">Facebook</a>
-        </div> 
+            <a href="#" class="a-share ui-nosvg ui-icon-sharing" data-id="{{id}}"><img src="assets/image/share-32.png"></a>
+
+            <a href="#" class="a-share-facebook ui-nosvg ui-icon-sharing" data-id="{{id}}"><img src="assets/image/facebook-32.png"></a>
+        </div>
     </div>
 </script>
 <script id="local-veterinaria-informacion" type="text/x-handlebars-template">
@@ -217,9 +250,9 @@
             <p id="titulo-{{id}}">{{titulo}}</p>
             <p id="doctor-{{id}}">{{doctor}}</p>
             <p id="descripcion-{{id}}">{{descripcion}}</p>
-            <a href="#" class="a-share-twitter" data-id="{{id}}">Twitter</a>
-            |
-            <a href="#" class="a-share-facebook" data-id="{{id}}">Facebook</a>
+            <a href="#" class="a-share ui-nosvg ui-icon-sharing" data-id="{{id}}"><img src="assets/image/share-32.png"></a>
+
+            <a href="#" class="a-share-facebook ui-nosvg ui-icon-facebook" data-id="{{id}}"><img src="assets/image/facebook-32.png"></a>
         </div>
     </div>
 </script>

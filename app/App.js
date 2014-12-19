@@ -5,7 +5,7 @@ var App = {
     initialize: function () {
         App.cityCircle = "";
         App.currentDuenio = 0;
-        App.currentMascota = null;
+        App.currentMascota = 0;
         App.duenios = [
             {
                 mascotas: [
@@ -19,6 +19,7 @@ var App = {
                         problemas:[
                             {
                                 id:"1",
+                                estado:{id:1,texto:'Activo'},
                                 titulo:"Pierna lastimada",
                                 descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                                 evoluciones: [
@@ -38,6 +39,7 @@ var App = {
                             },
                             {
                                 id:"2",
+                                estado:{id:2,texto:'Pasivo'},
                                 titulo:"Resfrio",
                                 descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                                 evoluciones: [
@@ -57,6 +59,7 @@ var App = {
                             },
                             {
                                 id:"3",
+                                estado:{id:1,texto:'Activo'},
                                 titulo:"Dolor de estomago",
                                 descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                                 evoluciones: [
@@ -209,6 +212,7 @@ var App = {
             mascotaVista: "",
             mascotaProblemas: "",
             mascotaEvoluciones: "",
+            estudiosImagenes: "",
             localPetShopInformacion: "",
             localVeterinariaInformacion: ""
         };
@@ -242,6 +246,8 @@ var App = {
             var html;
             var indexOfMascota = parseInt(App.currentMascota) - 1;
             Helper.jqueryClearHTMLContent('#div-evoluciones-listado');
+
+            $('#div-estudios-imagenes').hide();
 
             var informacion = {
                 nombre:App.duenios[App.currentDuenio].mascotas[indexOfMascota].nombre,
@@ -340,6 +346,15 @@ var App = {
         });
 
         $("#map-canvas")
+            .delegate('.a-share','click', function (e) {
+                e.preventDefault();
+                var id = $(this).attr('data-id');
+                var idTitulo = "titulo-" + id;
+                var idDescripcion = "descripcion-" + id;
+                var titulo = $('#' + idTitulo).text();
+                var message = 'Recomiendo ' + titulo + ' la mejor atencion by @ITHealth';
+                window.plugins.socialsharing.share(message);
+            })
             .delegate('.a-share-twitter','click', function (e) {
                 e.preventDefault();
                 var id = $(this).attr('data-id');
@@ -358,13 +373,25 @@ var App = {
                 var message = 'Recomiendo ' + titulo + ' la mejor atencion by @ITHealth';
                 var image = null;
                 var url = null;
-                window.plugins.socialsharing.shareViaFacebook(message, image , url , function() {
-                    console.log('share ok');
-                }, function(errormsg){
-                    alert(errormsg)
-                });
+                var messageCallBack = 'La información fue copiada a la papelera.\n Puede pegarla para compartir!';
+
+                window.plugins.socialsharing.shareViaFacebookWithPasteMessageHint(message, image, url, messageCallBack,
+                    function() {
+                        console.log('share ok')
+                    },
+                    function(errormsg){
+                        alert(errormsg)
+                    }
+                );
             });
 
+        $("#div-evoluciones-listado").delegate('.a-estudio-ver-imagenes','click', function (e) {
+            event.preventDefault();
+            var html = App.templates.estudiosImagenes();
+            Helper.jqueryFillHTMLContent('#div-estudios-imagenes', html)
+                .show()
+                .find("ul#ul-estudios-imagenes-listview").listview().listview('refresh');
+        });
     },
     onPageInit: function () {
         $.mobile.defaultPageTransition = 'none';
@@ -417,6 +444,9 @@ var App = {
         source = Helper.jqueryGetHTMLFromField('#local-veterinaria-informacion');
         App.templates.localVeterinariaInformacion = Handlebars.compile(source);
 
+        source = Helper.jqueryGetHTMLFromField('#estudio-imagenes');
+        App.templates.estudiosImagenes = Handlebars.compile(source);
+
     },
     onSuccess: function (position) {
 
@@ -468,7 +498,7 @@ var App = {
     markPetShops: function () {
         $.each(App.locales.petShops,function(index,petShop){
             App.markOnMap(petShop.georeference.lat, petShop.georeference.long, function (map, googleMapsLatLng, marker) {
-                var contentInfoWindow = App.templates.localVeterinariaInformacion({
+                var contentInfoWindow = App.templates.localPetShopInformacion({
                     id: petShop.data.id,
                     titulo: petShop.data.nombre,
                     descripcion: petShop.data.descripcion
