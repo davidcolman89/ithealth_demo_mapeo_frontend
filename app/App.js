@@ -3,6 +3,58 @@
  */
 var App = {
     initialize: function () {
+        App.cityCircle = "";
+        App.locales = {
+            petShops : [
+                {
+                    georeference:{lat:'-23.530549', long:'-46.681076'},
+                    data:{id:'p1',nombre:'PetShop A',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.530657', long:'-46.682417'},
+                    data:{id:'p2',nombre:'PetShop B',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.529418', long:'-46.680186'},
+                    data:{id:'p3',nombre:'PetShop C',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.528129', long:'-46.681988'},
+                    data:{id:'p4',nombre:'PetShop D',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.533097', long:'-46.679778'},
+                    data:{id:'p5',nombre:'PetShop E',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.532969', long:'-46.682922'},
+                    data:{id:'p6',nombre:'PetShop F',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                }
+            ],
+            veterinarias : [
+                {
+                    georeference:{lat:'-23.530401', long:'-46.684488'},
+                    data:{id:'v1',nombre:'Veterinaria A',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.531537', long:'-46.680108'},
+                    data:{id:'v2',nombre:'Veterinaria B',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.531424', long:'-46.683101'},
+                    data:{id:'v3',nombre:'Veterinaria C',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.529678', long:'-46.679116'},
+                    data:{id:'v4',nombre:'Veterinaria D',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-23.530037', long:'-46.684689'},
+                    data:{id:'v5',nombre:'Veterinaria E',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                }
+            ]
+        };
+        App.myPointGeoReference = {lat:'-23.530893', long:'-46.680588'};
         this.initializeTemplates();
         this.bindEvents();
     },
@@ -14,8 +66,11 @@ var App = {
             mascotasListado: "",
             mascotaVista: "",
             mascotaProblemas: "",
-            mascotaEvoluciones: ""
+            mascotaEvoluciones: "",
+            localPetShopInformacion: "",
+            localVeterinariaInformacion: ""
         };
+
         this.compileTemplates();
         this.fillTemplatesContent();
     },
@@ -35,7 +90,7 @@ var App = {
             Helper.jqueryMobileShowAjaxLoading();
             var mascotas = { mascotas:[
                 {id:1,nombre:"mascota 1",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
-                {id:2,nombre:"mascota 2",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."},
+                {id:2,nombre:"mascota 2",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."}
             ]};
             var html = App.templates.mascotasListado(mascotas);
             Helper.jqueryFillHTMLContent('#ul-mascotas-listview', html).listview('refresh');
@@ -62,7 +117,7 @@ var App = {
             var problemas = {problemas:[
                 {id:"1",titulo:"Pierna lastimada",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"},
                 {id:"2",titulo:"Resfrio",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"},
-                {id:"3",titulo:"Dolor de estomago",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"},
+                {id:"3",titulo:"Dolor de estomago",descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"}
             ]};
             html = App.templates.mascotaProblemas(problemas);
             Helper.jqueryFillHTMLContent('#ul-problemas-listview', html).listview('refresh');
@@ -114,32 +169,7 @@ var App = {
                 Helper.jqueryMobileShowAjaxLoading();
                 Mapa.clearMarkers();
                 //App.drawIntoMapCurrentPosition();
-                App.markOnMap(-34.670561, -58.380784, function(map, googleMapsLatLng, marker){
-                    var contentInfoWindow = '<div class="ui-grid-solo">' +
-                        '<div class="ui-block-a" >' +
-                        '<p>Pet-Shop Prueba 1</p>' +
-                        '<p>Texto: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' +
-                        '<a href="#" class="a-share">Twitter</a>' +
-                        ' | ' +
-                        '<a href="#" class="a-share">Facebook</a>' +
-                        '</div>' +
-                        '</div>';
-
-                    Mapa.addPopUP(marker, contentInfoWindow);
-                });
-                App.markOnMap(-34.671831, -58.381036, function(map, googleMapsLatLng, marker){
-                    var contentInfoWindow = '<div class="ui-grid-solo">' +
-                        '<div class="ui-block-a" >' +
-                        '<p>Pet-Shop Prueba 2</p>' +
-                        '<p>Texto: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' +
-                        '<a href="#" class="a-share">Twitter</a>' +
-                        ' | ' +
-                        '<a href="#" class="a-share">Facebook</a>' +
-                        '</div>' +
-                        '</div>';
-
-                    Mapa.addPopUP(marker, contentInfoWindow);
-                });
+                App.markPetShops();
                 Helper.jqueryMobileHideAjaxLoading();
             });
 
@@ -148,34 +178,7 @@ var App = {
                 Helper.jqueryMobileShowAjaxLoading();
                 Mapa.clearMarkers();
                 //App.drawIntoMapCurrentPosition();
-                App.markOnMap(-34.673290, -58.381989, function(map, googleMapsLatLng, marker){
-                    var contentInfoWindow = '<div class="ui-grid-solo">' +
-                        '<div class="ui-block-a" >' +
-                        '<p>Veterinaria Prueba 1</p>' +
-                        '<p>Doctor: Juan Perez</p>' +
-                        '<p>Texto: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' +
-                        '<a href="#" class="a-share">Twitter</a>' +
-                        ' | ' +
-                        '<a href="#" class="a-share">Facebook</a>' +
-                        '</div>' +
-                        '</div>';
-
-                    Mapa.addPopUP(marker, contentInfoWindow);
-                });
-                App.markOnMap(-34.674676, -58.382161, function(map, googleMapsLatLng, marker){
-                    var contentInfoWindow = '<div class="ui-grid-solo">' +
-                        '<div class="ui-block-a" >' +
-                        '<p>Veterinaria Prueba 2</p>' +
-                        '<p>Doctor: Eduardo Ramirez</p>' +
-                        '<p>Texto: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' +
-                        '<a href="#" class="a-share">Twitter</a>' +
-                        ' | ' +
-                        '<a href="#" class="a-share">Facebook</a>' +
-                        '</div>' +
-                        '</div>';
-
-                    Mapa.addPopUP(marker, contentInfoWindow);
-                });
+                App.markVeterinarias();
                 Helper.jqueryMobileHideAjaxLoading();
             });
         });
@@ -262,11 +265,20 @@ var App = {
         source = Helper.jqueryGetHTMLFromField('#mascota-evoluciones');
         App.templates.mascotaEvoluciones = Handlebars.compile(source);
 
+        source = Helper.jqueryGetHTMLFromField('#local-petshop-informacion');
+        App.templates.localPetShopInformacion = Handlebars.compile(source);
+
+        source = Helper.jqueryGetHTMLFromField('#local-veterinaria-informacion');
+        App.templates.localVeterinariaInformacion = Handlebars.compile(source);
+
     },
     onSuccess: function (position) {
 
         var latitude = position.coords.latitude;
         var longitude = position.coords.longitude;
+
+        App.myPointGeoReference.lat = latitude;
+        App.myPointGeoReference.long = longitude;
 
         App.markOnMap(latitude, longitude, function (map, googleMapsLatLng) {
             var populationOptions = {
@@ -279,8 +291,7 @@ var App = {
                 center: googleMapsLatLng,
                 radius: 5 * 100
             };
-
-            cityCircle = new google.maps.Circle(populationOptions);
+            App.cityCircle = new google.maps.Circle(populationOptions);
         });
         Helper.jqueryMobileHideAjaxLoading();
 
@@ -309,5 +320,30 @@ var App = {
         Helper.jqueryMobileShowAjaxLoading();
 
         navigator.geolocation.getCurrentPosition(App.onSuccess, App.onError);
+    },
+    markPetShops: function () {
+        $.each(App.locales.petShops,function(index,petShop){
+            App.markOnMap(petShop.georeference.lat, petShop.georeference.long, function (map, googleMapsLatLng, marker) {
+                var contentInfoWindow = App.templates.localVeterinariaInformacion({
+                    id: petShop.data.id,
+                    titulo: petShop.data.nombre,
+                    descripcion: petShop.data.descripcion
+                });
+                Mapa.addPopUP(marker, contentInfoWindow);
+            });
+        });
+    },
+    markVeterinarias: function () {
+        $.each(App.locales.veterinarias,function(index,veterinaria){
+            App.markOnMap(veterinaria.georeference.lat, veterinaria.georeference.long, function (map, googleMapsLatLng, marker) {
+                var contentInfoWindow = App.templates.localVeterinariaInformacion({
+                    id: veterinaria.data.id,
+                    titulo: veterinaria.data.nombre,
+                    doctor: veterinaria.data.doctor,
+                    descripcion: veterinaria.data.descripcion
+                });
+                Mapa.addPopUP(marker, contentInfoWindow);
+            });
+        });
     }
 };

@@ -200,6 +200,31 @@
         {{/each}}
     </ul>
 </script>
+<script id="local-petshop-informacion" type="text/x-handlebars-template">
+    <div class="ui-grid-solo"> 
+        <div class="ui-block-a" >
+            <p id="titulo-{{id}}">{{titulo}}</p>
+            <p id="descripcion-{{id}}">{{descripcion}}</p>
+            <a href="#" class="a-share-twitter" data-id="{{id}}">Twitter</a>
+            |
+            <a href="#" class="a-share-facebook" data-id="{{id}}">Facebook</a>
+        </div> 
+    </div>
+</script>
+<script id="local-veterinaria-informacion" type="text/x-handlebars-template">
+    <div class="ui-grid-solo">
+        <div class="ui-block-a" >
+            <p id="titulo-{{id}}">{{titulo}}</p>
+            <p id="doctor-{{id}}">{{doctor}}</p>
+            <p id="descripcion-{{id}}">{{descripcion}}</p>
+            <a href="#" class="a-share-twitter" data-id="{{id}}">Twitter</a>
+            |
+            <a href="#" class="a-share-facebook" data-id="{{id}}">Facebook</a>
+        </div>
+    </div>
+</script>
+
+
 <!----------------------------::EndTemplates::---------------------------->
 <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
 <script src="assets/lib/jquery/jquery-1.11.1.min.js" type="text/javascript" charset="utf-8"></script>
@@ -214,8 +239,6 @@
 <script src="app/Mapa.js" type="text/javascript" charset="utf-8"></script>
 <script src="app/App.js" type="text/javascript" charset="utf-8"></script>
 <script type="application/javascript" charset="utf-8">
-    var cityCircle;
-
     App.initialize();
 </script>
 </body>
