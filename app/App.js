@@ -168,7 +168,6 @@ var App = {
                 event.preventDefault();
                 Helper.jqueryMobileShowAjaxLoading();
                 Mapa.clearMarkers();
-                //App.drawIntoMapCurrentPosition();
                 App.markPetShops();
                 Helper.jqueryMobileHideAjaxLoading();
             });
@@ -177,7 +176,6 @@ var App = {
                 event.preventDefault();
                 Helper.jqueryMobileShowAjaxLoading();
                 Mapa.clearMarkers();
-                //App.drawIntoMapCurrentPosition();
                 App.markVeterinarias();
                 Helper.jqueryMobileHideAjaxLoading();
             });
@@ -274,8 +272,8 @@ var App = {
     },
     onSuccess: function (position) {
 
-        var latitude = position.coords.latitude;
-        var longitude = position.coords.longitude;
+        var latitude = position.coords.latitude || null;
+        var longitude = position.coords.longitude || null;
 
         App.myPointGeoReference.lat = latitude;
         App.myPointGeoReference.long = longitude;
@@ -317,9 +315,7 @@ var App = {
         Mapa.initializeMap(optionsMap, document.getElementById("map-canvas"));
     },
     drawIntoMapCurrentPosition: function () {
-        Helper.jqueryMobileShowAjaxLoading();
-
-        navigator.geolocation.getCurrentPosition(App.onSuccess, App.onError);
+        navigator.geolocation.getCurrentPosition(App.onSuccess, App.onError,{maximumAge: 3000, timeout: 5000, enableHighAccuracy: true});
     },
     markPetShops: function () {
         $.each(App.locales.petShops,function(index,petShop){
