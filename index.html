@@ -41,7 +41,7 @@
                         <li>
                             Version
                             <ul>
-                                <li><p>0.0.1-ac5522e(git)</p></li>
+                                <li><p>0.0.1-73eba18(git)</p></li>
                             </ul>
                         </li>
                         <li>
@@ -110,7 +110,7 @@
 <script id="header-content" type="text/x-handlebars-template">
     <div class="ui-bar ui-bar-b">
         <img src="assets/image/logos/ith-header-logo_ldpi.png" class="logo ui-btn-inline">
-        <h1 class="ui-btn-inline">Mapeo </h1>
+        <h1 class="ui-btn-inline">Mapping </h1>
     </div>
     <h1>{{title}}</h1>
     {{{html}}}
@@ -120,7 +120,7 @@
         <ul>
             <li><a href="#page-home" data-icon="home" >Home</a></li>
             <li><a href="#page-location" data-icon="location">Location</a></li>
-            <li><a href="#page-historia-clinica" data-icon="bullets">Mascotas</a></li>
+            <li><a href="#page-historia-clinica" data-icon="bullets">Pet</a></li>
             <li><a href="#page-app-info" data-icon="info">About</a></li>
         </ul>
     </div>
@@ -128,11 +128,11 @@
 <script id="location-navbar" type="text/x-handlebars-template">
     <div data-role="navbar">
         <ul>
-            <li><a id="a-reload-location" href="#" data-icon="refresh" data-theme="b">Actualizar</a></li>
+            <li><a id="a-reload-location" href="#" data-icon="refresh" data-theme="b">Update</a></li>
             <li><a href="#" id="a-georefence-me" data-icon="location" data-theme="b">Me</a></li>
-            <li><a href="#" id="a-georefence" data-icon="plus" data-theme="b">Marcar</a></li>
-            <li><a href="#" id="a-georefence-petshops" data-icon="search" data-theme="b">Pet Shops</a></li>
-            <li><a href="#" id="a-georefence-veterinarias" data-icon="search" data-theme="b">Veterinarias</a></li>
+            <li><a href="#" id="a-georefence" data-icon="plus" data-theme="b">Mark</a></li>
+            <li><a href="#" id="a-georefence-petshops" data-icon="search" data-theme="b">Pet Shop</a></li>
+            <li><a href="#" id="a-georefence-veterinarias" data-icon="search" data-theme="b">Pet Clinic</a></li>
         </ul>
     </div>
 </script>
@@ -141,19 +141,19 @@
     <table  class="ui-table table-stripe">
         <tbody>
         <tr>
-            <th>Nombre</th>
+            <th>Name</th>
             <td>{{nombre}}</td>
         </tr>
         <tr>
-            <th>Duenio</th>
+            <th>Owner</th>
             <td>{{duenio}}</td>
         </tr>
         <tr>
-            <th>Sexo</th>
+            <th>Genre</th>
             <td>{{sexo}}</td>
         </tr>
         <tr>
-            <th>Nacimiento</th>
+            <th>Born</th>
             <td>{{nacimiento}}</td>
         </tr>
         </tbody>
@@ -177,14 +177,14 @@
         <p>
             {{descripcion}}
             <br>
-            <a class="a-show-evoluciones" href="#" data-id-problema="{{id}}">Evoluciones</a>
+            <a class="a-show-evoluciones" href="#" data-id-problema="{{id}}">Evolution</a>
         </p>
         <p class="ui-li-aside"><strong>#{{id}}</strong></p>
     </li>
     {{/each}}
 </script>
 <script id="mascota-evoluciones" type="text/x-handlebars-template">
-    <h2>Evoluciones de {{problema.titulo}} #{{problema.id}}</h2>
+    <h2>Evolutions of {{problema.titulo}} #{{problema.id}}</h2>
     <ul id="ul-evoluciones-listview" data-role="listview" data-filter="true" data-inset="true">
         {{#each evoluciones}}
         <li>
@@ -208,7 +208,7 @@
 <script id="estudio-imagenes" type="text/x-handlebars-template">
     <ul id="ul-estudios-imagenes-listview" data-role="listview" data-filter="true" data-inset="true">
         <li>
-            <h2>Imagen 1</h2>
+            <h2>Image 1</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 <br>
@@ -216,7 +216,7 @@
             </p>
         </li>
         <li>
-            <h2>Imagen 2</h2>
+            <h2>Image 2</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 <br>
@@ -224,7 +224,7 @@
             </p>
         </li>
         <li>
-            <h2>Imagen 3</h2>
+            <h2>Image 3</h2>
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                 <br>

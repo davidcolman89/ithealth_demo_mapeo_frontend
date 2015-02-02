@@ -493,7 +493,7 @@ var App = {
         Mapa.initializeMap(optionsMap, document.getElementById("map-canvas"));
     },
     drawIntoMapCurrentPosition: function () {
-        navigator.geolocation.getCurrentPosition(App.onSuccess, App.onError,{maximumAge: 3000, timeout: 5000, enableHighAccuracy: true});
+        navigator.geolocation.getCurrentPosition(App.onSuccess, App.onError,{maximumAge: 9000, timeout: 60000, enableHighAccuracy: true});
     },
     markPetShops: function () {
         $.each(App.locales.petShops,function(index,petShop){
