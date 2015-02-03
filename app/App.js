@@ -19,7 +19,7 @@ var App = {
                         problemas:[
                             {
                                 id:"1",
-                                estado:{id:1,texto:'Activo'},
+                                estado:{id:1,texto:'Active'},
                                 titulo:"Pierna lastimada",
                                 descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                                 evoluciones: [
@@ -39,7 +39,7 @@ var App = {
                             },
                             {
                                 id:"2",
-                                estado:{id:2,texto:'Pasivo'},
+                                estado:{id:2,texto:'passive'},
                                 titulo:"Resfrio",
                                 descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                                 evoluciones: [
@@ -59,7 +59,7 @@ var App = {
                             },
                             {
                                 id:"3",
-                                estado:{id:1,texto:'Activo'},
+                                estado:{id:1,texto:'Active'},
                                 titulo:"Dolor de estomago",
                                 descripcion:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
                                 evoluciones: [
@@ -409,7 +409,7 @@ var App = {
             html:App.templates.locationNavbar()
         }));
         Helper.jqueryFillHTMLContent('.header-content#header-app-info', App.templates.headerContent({title:'©2014 App'}));
-        Helper.jqueryFillHTMLContent('.header-content#header-historia-clinica', App.templates.headerContent({title:'Mascotas'}));
+        Helper.jqueryFillHTMLContent('.header-content#header-historia-clinica', App.templates.headerContent({title:'Pets'}));
     },
     fillFooterContent: function () {
         Helper.jqueryFillHTMLContent('.footer-content', App.templates.footerContent());
@@ -493,7 +493,7 @@ var App = {
         Mapa.initializeMap(optionsMap, document.getElementById("map-canvas"));
     },
     drawIntoMapCurrentPosition: function () {
-        navigator.geolocation.getCurrentPosition(App.onSuccess, App.onError,{maximumAge: 9000, timeout: 60000, enableHighAccuracy: true});
+        navigator.geolocation.getCurrentPosition(App.onSuccess, App.onError,{enableHighAccuracy: true});
     },
     markPetShops: function () {
         $.each(App.locales.petShops,function(index,petShop){
