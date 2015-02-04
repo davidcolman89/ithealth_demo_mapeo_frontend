@@ -47,10 +47,11 @@ Mapa.addMarker = function (coordenadas, callback) {
     var lat = parseFloat(coordenadas.lat);
     var googleMapsLatLng = new google.maps.LatLng(lat, lng);
     var marker = Mapa.marker(googleMapsLatLng);
+    var centerMarker = coordenadas.center || false;
 
     Mapa.markers.push(marker);
     Mapa.map.setZoom(15);
-    Mapa.map.setCenter(googleMapsLatLng);
+    if(centerMarker === true) Mapa.map.setCenter(googleMapsLatLng);
 
     if(!empty(callback)) callback(Mapa.map, googleMapsLatLng, marker);
 

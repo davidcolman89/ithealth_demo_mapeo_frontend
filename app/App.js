@@ -149,6 +149,7 @@ var App = {
                 ]
             }
         ];
+
         App.locales = {
             petShops : [
                 {
@@ -174,6 +175,26 @@ var App = {
                 {
                     georeference:{lat:'-23.532969', long:'-46.682922'},
                     data:{id:'p6',nombre:'PetShop F',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.670433', long:'-58.380625'},
+                    data:{id:'p7',nombre:'PetShop G',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.668819', long:'-58.380142'},
+                    data:{id:'p8',nombre:'PetShop H',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.667504', long:'-58.381826'},
+                    data:{id:'p9',nombre:'PetShop I',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.671095', long:'-58.384519'},
+                    data:{id:'p10',nombre:'PetShop J',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.671148', long:'-58.375067'},
+                    data:{id:'p11',nombre:'PetShop K',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
                 }
             ],
             veterinarias : [
@@ -196,6 +217,22 @@ var App = {
                 {
                     georeference:{lat:'-23.530037', long:'-46.684689'},
                     data:{id:'v5',nombre:'Veterinaria E',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.676963', long:'-58.382685'},
+                    data:{id:'v6',nombre:'Veterinaria F',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.667080', long:'-58.378522'},
+                    data:{id:'v7',nombre:'Veterinaria G',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.678727', long:'-58.388092'},
+                    data:{id:'v8',nombre:'Veterinaria H',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+                {
+                    georeference:{lat:'-34.670857', long:'-58.381526'},
+                    data:{id:'v9',nombre:'Veterinaria I',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
                 }
             ]
         };
@@ -303,7 +340,7 @@ var App = {
                     return false;
                 }
                 Mapa.clearMarkers();
-                App.markOnMap(lat, lng);
+                App.markOnMap(lat, lng, true);
             });
 
             Helper.jqueryOnClick('#a-georefence-petshops',function (event) {
@@ -456,7 +493,7 @@ var App = {
         App.myPointGeoReference.lat = latitude;
         App.myPointGeoReference.long = longitude;
 
-        App.markOnMap(latitude, longitude, function (map, googleMapsLatLng) {
+        App.markOnMap(latitude, longitude, true, function (map, googleMapsLatLng) {
             var populationOptions = {
                 strokeColor: '#FF0000',
                 strokeOpacity: 0.1,
@@ -476,10 +513,11 @@ var App = {
         Helper.jqueryMobileHideAjaxLoading();
         alert('code: '    + error.code    + '\n' + 'message: ' + error.message + '\n');
     },
-    markOnMap: function(lat, long, callback) {
+    markOnMap: function(lat, long, center, callback) {
         var place = {
             lat:lat,
-            lng:long
+            lng:long,
+            center:(center || false)
         };
         var cb = callback || null;
         Mapa.addMarker(place, cb);
@@ -497,7 +535,7 @@ var App = {
     },
     markPetShops: function () {
         $.each(App.locales.petShops,function(index,petShop){
-            App.markOnMap(petShop.georeference.lat, petShop.georeference.long, function (map, googleMapsLatLng, marker) {
+            App.markOnMap(petShop.georeference.lat, petShop.georeference.long, false, function (map, googleMapsLatLng, marker) {
                 var contentInfoWindow = App.templates.localPetShopInformacion({
                     id: petShop.data.id,
                     titulo: petShop.data.nombre,
@@ -509,7 +547,7 @@ var App = {
     },
     markVeterinarias: function () {
         $.each(App.locales.veterinarias,function(index,veterinaria){
-            App.markOnMap(veterinaria.georeference.lat, veterinaria.georeference.long, function (map, googleMapsLatLng, marker) {
+            App.markOnMap(veterinaria.georeference.lat, veterinaria.georeference.long, false, function (map, googleMapsLatLng, marker) {
                 var contentInfoWindow = App.templates.localVeterinariaInformacion({
                     id: veterinaria.data.id,
                     titulo: veterinaria.data.nombre,
