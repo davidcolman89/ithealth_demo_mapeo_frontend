@@ -195,7 +195,31 @@ var App = {
                 {
                     georeference:{lat:'-34.671148', long:'-58.375067'},
                     data:{id:'p11',nombre:'PetShop K',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
-                }
+                },
+                {
+                    georeference:{lat:'-24.046873', long:'-46.516192'},
+                    data:{id:'p66',nombre:'PetShop AAH',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+
+                {
+                    georeference:{lat:'-24.047754', long:'-46.518048'},
+                    data:{id:'p99',nombre:'PetShop A5T',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+
+                {
+                    georeference:{lat:'-24.047029', long:'-46.519067'},
+                    data:{id:'p178',nombre:'PetShop ZZ Top',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+
+                {
+                    georeference:{lat:'-24.046696', long:'-46.518294'},
+                    data:{id:'p1A',nombre:'PetShop A11',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+
+                {
+                    georeference:{lat:'-24.046206', long:'-46.517576'},
+                    data:{id:'p566',nombre:'PetShop AJJ',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
             ],
             veterinarias : [
                 {
@@ -233,7 +257,32 @@ var App = {
                 {
                     georeference:{lat:'-34.670857', long:'-58.381526'},
                     data:{id:'v9',nombre:'Veterinaria I',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
-                }
+                },
+
+                {
+                    georeference:{lat:'-24.045393', long:'-46.519925'},
+                    data:{id:'v1AA',nombre:'Veterinaria AVV',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+
+                {
+                    georeference:{lat:'-24.047999', long:'-46.520784'},
+                    data:{id:'v166',nombre:'Veterinaria ASSS',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+
+                {
+                    georeference:{lat:'-24.044737', long:'-46.511782'},
+                    data:{id:'v888',nombre:'Veterinaria AHJ',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+
+                {
+                    georeference:{lat:'-24.044325', long:'-46.514346'},
+                    data:{id:'v99',nombre:'Veterinaria 000',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
+
+                {
+                    georeference:{lat:'-24.046922', long:'-46.518530'},
+                    data:{id:'v7KK',nombre:'Veterinaria 656',descripcion:'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua'}
+                },
             ]
         };
         App.myPointGeoReference = {lat:'-23.530893', long:'-46.680588'};
@@ -347,6 +396,7 @@ var App = {
                 event.preventDefault();
                 Helper.jqueryMobileShowAjaxLoading();
                 Mapa.clearMarkers();
+                App.drawIntoMapCurrentPosition();
                 App.markPetShops();
                 Helper.jqueryMobileHideAjaxLoading();
             });
@@ -355,6 +405,7 @@ var App = {
                 event.preventDefault();
                 Helper.jqueryMobileShowAjaxLoading();
                 Mapa.clearMarkers();
+                App.drawIntoMapCurrentPosition();
                 App.markVeterinarias();
                 Helper.jqueryMobileHideAjaxLoading();
             });
@@ -504,6 +555,7 @@ var App = {
                 center: googleMapsLatLng,
                 radius: 5 * 100
             };
+            if(App.cityCircle) App.cityCircle.setMap(null);
             App.cityCircle = new google.maps.Circle(populationOptions);
         });
         Helper.jqueryMobileHideAjaxLoading();
